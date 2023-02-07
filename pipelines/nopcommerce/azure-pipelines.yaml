@@ -4,11 +4,10 @@ pool:
   vmImage: "ubuntu-latest"
 
 trigger:
-  - main
+  - master
 
 steps:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'build'
-      publishWebProjects: true
-      publishTestResults: true 
+      projects: 'src/NopCommerce.sln' 
