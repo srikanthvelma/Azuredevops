@@ -4,11 +4,22 @@ pool:
   vmImage: "ubuntu-latest"
 
 trigger:
-  - master
+  - main
 
 jobs:
   - job: print_disc_util
     displayName: print disc utilization 
     steps:
-      - script: echo "df -H"
-        target: "Azure Pipelines"
+      - script: df -H
+        target: host
+  - job: run_script
+    displayName: run a shell script 
+    steps:
+      - script: 'sh **/apache.sh'
+        target: host
+  - job: run_command
+    displayName: run command to update packages
+    steps:
+      - script: 'sudo apt update'
+        target: host
+      
