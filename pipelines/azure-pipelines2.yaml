@@ -1,0 +1,16 @@
+---
+pool: 
+  name: "Azure pipelines"
+  vmImage: "ubuntu-latest"
+
+trigger: 
+  - master
+
+jobs:
+  - job: print_number
+    steps:
+      - script: echo 1 
+      - script: echo 2
+      - script: echo 3
+      - script: echo 4
+      - script: echo 5

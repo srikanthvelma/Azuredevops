@@ -1,0 +1,52 @@
+---
+pool: 
+  name: "Azure pipelines"
+  vmImage: "ubuntu-latest"
+
+trigger: 
+  - master
+
+stages: 
+  - stage: build_mac
+    displayName: build for mac
+    jobs:
+      - job: print_number
+        steps:
+          - script: echo 1 
+          - script: echo 2
+          - script: echo 3
+          - script: echo 4
+          - script: echo 5
+    
+  - stage: build_linux
+    displayName: build for linux
+    jobs:
+      - job: print_number
+        steps:
+          - script: echo 1 
+          - script: echo 2
+          - script: echo 3
+          - script: echo 4
+          - script: echo 5
+
+  - stage: build_win
+    displayName: build for windows
+    jobs:
+      - job: print_number
+        steps:
+          - script: echo 1 
+          - script: echo 2
+          - script: echo 3
+          - script: echo 4
+          - script: echo 5
+  - stage: build_unix
+    displayName: build for unix
+    jobs:
+      - job: print_number
+        steps:
+          - script: echo 1 
+          - script: echo 2
+          - script: echo 3
+          - script: echo 4
+          - script: echo 5
+  
