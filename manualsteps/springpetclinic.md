@@ -17,6 +17,7 @@ sudo apt install openjdk-17-jdk -y
 java --version
 ```
 2. maven installation
+* we can install maven directly from apt but it will install 3.6.3, by this build is not done so try to installing 3.8.7
 ```
 wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz /tmp
 sudo tar -zxvf apache-maven-3.8.7-bin.tar.gz
@@ -29,7 +30,7 @@ mvn -v
 
 ![preview](images/mvn2.png)
 
-3. Spring pet clinic package
+1. Spring pet clinic package
 ```
 git clone https://github.com/spring-projects/spring-petclinic.git
 cd spring-petclinic
