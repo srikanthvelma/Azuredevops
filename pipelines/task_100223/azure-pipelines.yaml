@@ -1,0 +1,14 @@
+---
+pool:
+  name: "Azure Pipelines"
+  vmImage: "ubuntu-latest"
+
+trigger:
+  - master
+
+jobs:
+  - job: print_disc_util
+    displayName: print disc utilization 
+    steps:
+      - script: echo "df -H"
+        target: "Azure Pipelines"
