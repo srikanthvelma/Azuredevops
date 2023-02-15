@@ -1,0 +1,15 @@
+---
+pool:
+  name: "Azure Pipelines"
+  vmImage: "ubuntu-latest"
+
+trigger:
+  - main
+
+variables:
+- name: version
+  value: 16.x
+steps:
+  - task: 
+  
+    
