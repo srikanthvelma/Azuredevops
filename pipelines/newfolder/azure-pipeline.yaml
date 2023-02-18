@@ -1,0 +1,10 @@
+---
+pool:
+  name: "Default"
+
+trigger:
+  - main
+
+steps:
+  - script: "printenv"
+    displayName: printing all environmental variables

@@ -11,15 +11,13 @@ jobs:
     displayName: print disc utilization 
     steps:
       - script: df -H
-        target: host
   - job: run_script
     displayName: run a shell script 
     steps:
-      - script: 'sh **/apache.sh'
-        target: host
+      - script: 'bash pipelines/task/apache.sh'
   - job: run_command
     displayName: run command to update packages
     steps:
       - script: 'sudo apt update'
-        target: host
+    
       

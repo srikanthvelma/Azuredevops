@@ -22,7 +22,7 @@ java --version
 wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz /tmp
 sudo tar -zxvf apache-maven-3.8.7-bin.tar.gz
 sudo mv apache-maven-3.8.7/ /opt/maven/
-sudo vi /etc/environment  # add env variable as :opt/maven/bin
+sudo vi /etc/environment  # add env variable as :/opt/maven/bin
 source /etc/environment
 mvn -v
 ```

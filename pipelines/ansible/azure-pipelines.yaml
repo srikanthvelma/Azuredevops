@@ -1,0 +1,11 @@
+---
+pool:
+  name: "Default"
+
+trigger:
+  - main
+
+steps:
+  - script: "ansible-playbook -i hosts javamultiver.yml"
+    workingDirectory: ./Playbooks/java
+    displayName: installing java through playbook

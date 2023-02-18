@@ -10,19 +10,9 @@ parameters:
 - name: version
   displayName: build versoin
   type: string
-  default: v1.0-1
-  values:
-    - v1.0-2
-    - v1.0-3
-
+  default: v1.0
 
 jobs:
-  - job: preparation_job
-    displayName: install docker
-    steps:
-      - task: DockerInstaller@0
-        inputs:
-          dockerVersion: '17.09.0-ce'
   - job: build_job
     displayName: build students courses rest api
     steps:
@@ -30,6 +20,7 @@ jobs:
         inputs: 
           command: 'build'
           Dockerfile: '**/Dockerfile'
-          tags: 
+          tags: $(build.build.id)
+          
 
 

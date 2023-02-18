@@ -1,13 +1,31 @@
 ---
-pool:
-  name: "Azure Pipelines"
-  vmImage: "ubuntu-latest"
-
-trigger:
-  - master
-
-steps:
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'build'
-      projects: 'src/NopCommerce.sln' 
+  pool:
+    name: "Default"
+  
+  trigger:
+    - main
+  
+  stages:
+    - stage: BuildStage
+      displayName: Building nop package
+      jobs:
+        - job: DotnetJob
+          displayName: Dotnet
+          steps:
+            - task: DotNetCoreCLI@2
+              inputs:
+                command: 'build'
+                projects: ~/nopCommerce/src
+  
+            - script: aws s3 cp $(Build.SourcesDirectory)/target/spring-petclinic-2.7.3.jar s3://srikanthcicd --acl public-read-write
+              displayName: uploading jar file to s3 
+  
+    - stage: RunStage
+      displayName: CI
+      jobs:
+        - job: ansibleJob
+          displayName: run through ansible 
+          steps:
+            - script: "ansible-playbook -i hosts spc.yaml"
+              workingDirectory: /home/ubuntu
+    
