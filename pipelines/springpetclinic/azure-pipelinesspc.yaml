@@ -1,0 +1,47 @@
+---
+pool:
+  name: "Default"
+
+trigger:
+  - main
+
+parameters:
+  - name: bucket_name
+    displayName: bucket name
+    type: string
+    default: srikanthcicd
+  - name: package_name
+    displayName: package name
+    type: string
+    default: spring-petclinic-2.7.3.jar
+
+stages:
+  - stage: BuildStage
+    displayName: CI
+    jobs:
+      - job: mavenjob
+        displayName: maven
+        steps:
+          - task: Maven@3
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'package'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              javaHomeOption: 'Path'
+              jdkDirectory: /usr/lib/jvm/java-17-openjdk-amd64
+              mavenVersionOption: 'Path'
+              mavenDirectory: /opt/maven
+
+          - script: aws s3 cp $(Build.SourcesDirectory)/target/spring-petclinic-2.7.3.jar s3://srikanthcicd --acl public-read-write
+            displayName: uploading jar file to s3 
+
+  - stage: RunStage
+    displayName: CI
+    jobs:
+      - job: ansibleJob
+        displayName: run through ansible 
+        steps:
+          - script: "ansible-playbook -i hosts spc.yaml"
+            workingDirectory: /home/ubuntu
+  

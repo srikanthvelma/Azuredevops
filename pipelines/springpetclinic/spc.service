@@ -1,0 +1,14 @@
+[Unit]
+Description=Springpetclinic service
+
+[Service]
+User=devops
+WorkingDirectory=/home/devops
+ExecStart=/usr/bin/java -jar spring-petclinic-2.7.3.jar
+SuccessExitStatus=101
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
