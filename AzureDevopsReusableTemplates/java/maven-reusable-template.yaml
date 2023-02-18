@@ -21,9 +21,10 @@ parameters:
 steps:
   - task: Maven@3
     inputs:
-    mavenPOMFile: "${{ parameters.mavenPomFile }}"
-    publishJUnitResults: yes
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: "${{ parameters.jdkVersion }}"    
+      mavenPOMFile: "${{ parameters.mavenPomFile }}"
+      goals: "${{ parameters.goal }}"
+      publishJUnitResults: yes
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: "${{ parameters.jdkVersion }}"    
     
