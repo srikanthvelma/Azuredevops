@@ -1,0 +1,29 @@
+# template for java based projects using maven
+parameters:
+  - name: mavenPomFile
+    displayName: pom file
+    type: string
+    default: 'pom.xml'
+  - name: goal
+    displayName: maven goal
+    type: string
+    default: 'package'
+    values: 
+      - 'package'
+      - 'build'
+      - 'clean'
+      - 'compile'
+  - name: jdkVersion
+    displayName: java version
+    type: string
+    default: '1.11'
+
+steps:
+  - task: Maven@3
+    inputs:
+    mavenPOMFile: "${{ parameters.mavenPomFile }}"
+    publishJUnitResults: yes
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: "${{ parameters.jdkVersion }}"    
+    
