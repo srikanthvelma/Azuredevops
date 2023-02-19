@@ -24,7 +24,7 @@ parameters:
   - name: mavenAuthenticateFeed
     displayName: Authentic to maven feed
     type: boolean
-    default: yes 
+    default: true
 
 steps:
   - task: Maven@3
