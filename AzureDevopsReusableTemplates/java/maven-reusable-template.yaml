@@ -17,6 +17,14 @@ parameters:
     displayName: java version
     type: string
     default: '1.11'
+  - name: PathtoPublish
+    displayName: path to publish
+    type: string
+    default: 'target/spring-petclinic-2.7.3.jar'
+  - name: mavenAuthenticateFeed
+    displayName: Authentic to maven feed
+    type: boolean
+    default: yes 
 
 steps:
   - task: Maven@3
@@ -26,5 +34,12 @@ steps:
       publishJUnitResults: yes
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       javaHomeOption: 'JDKVersion'
-      jdkVersionOption: "${{ parameters.jdkVersion }}"    
+      jdkVersionOption: "${{ parameters.jdkVersion }}"  
+      mavenAuthenticateFeed: "${{ parameters.mavenAuthenticateFeed }}"
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "${{ parameters.PathtoPublish }}" 
+      ArtifactName: 'drop' 
+      publishLocation: 'Container'  
     
