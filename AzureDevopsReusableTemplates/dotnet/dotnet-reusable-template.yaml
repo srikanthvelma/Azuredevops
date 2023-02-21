@@ -25,7 +25,7 @@ parameters:
   - name: 'ArtifactName'
     displayName: "artifact name"
     type: string
-    default: 'srdotnet'
+    default: 'srwebapp'
 
 steps:
   - task: DotNetCoreCLI@2
