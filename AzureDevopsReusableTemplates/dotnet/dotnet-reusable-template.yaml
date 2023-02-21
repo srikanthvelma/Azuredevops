@@ -10,24 +10,36 @@ parameters:
       - 'publish'
       - 'restore'
       - 'test'
+
+  - name: projects
+    isplayName: "projects"
+    type: string
+    default: 'src/NopCommerce.sln'
+
   - name: 'publishWebProjects'
     displayName: "publish web projects"
     type: boolean
     default: 'true'
     values: 
       - 'false'
+
   - name: 'zipAfterPublish'
     displayName: "zip after pubish"
     type: boolean
     default: 'true'
     values: 
       - 'false'
+      
   - name: 'ArtifactName'
     displayName: "artifact name"
     type: string
     default: 'srwebapp'
 
 steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      projects: 'src/NopCommerce.sln'
   - task: DotNetCoreCLI@2
     inputs:
       command: "${{ parameters.command }}"
