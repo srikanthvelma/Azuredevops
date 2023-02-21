@@ -12,7 +12,7 @@ parameters:
       - 'test'
 
   - name: projects
-    isplayName: "projects"
+    displayName: "projects"
     type: string
     default: 'src/NopCommerce.sln'
 
@@ -29,7 +29,7 @@ parameters:
     default: 'true'
     values: 
       - 'false'
-      
+
   - name: 'ArtifactName'
     displayName: "artifact name"
     type: string
