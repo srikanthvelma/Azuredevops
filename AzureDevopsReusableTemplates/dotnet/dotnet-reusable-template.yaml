@@ -14,12 +14,14 @@ parameters:
     displayName: "publish web projects"
     type: boolean
     default: 'true'
-    values: 'false'
+    values: 
+      - 'false'
   - name: 'zipAfterPublish'
     displayName: "zip after pubish"
     type: boolean
     default: 'true'
-    values: 'false'
+    values: 
+      - 'false'
   - name: 'ArtifactName'
     displayName: "artifact name"
     type: string
