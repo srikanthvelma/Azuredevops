@@ -38,6 +38,6 @@ steps:
 
   - task: PublishPipelineArtifact@1
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      targetPath: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: "${{ parameters.ArtifactName }}"
       publishLocation: 'Container'
