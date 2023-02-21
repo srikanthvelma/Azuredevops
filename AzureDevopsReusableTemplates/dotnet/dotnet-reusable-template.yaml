@@ -42,7 +42,7 @@ steps:
       projects: 'src/NopCommerce.sln'
   - task: DotNetCoreCLI@2
     inputs:
-      command: "${{ parameters.command }}"
+      command: "publish"
       publishWebProjects: "${{ parameters.publishWebProjects }}"
       arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
       zipAfterPublish: "${{ parameters.zipAfterPublish }}"
