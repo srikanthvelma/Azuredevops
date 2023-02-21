@@ -1,0 +1,41 @@
+# dotnet reusable template for dotnet projects
+parameters:
+  - name: 'command'
+    displayName: command
+    type: string
+    default: 'build'
+    values:
+      - 'push'
+      - 'pack'
+      - 'publish'
+      - 'restore'
+      - 'test'
+  - name: 'publishWebProjects'
+    displayName: "publish web projects"
+    type: boolean
+    default: 'true'
+    values: 'false'
+  - name: 'zipAfterPublish'
+    displayName: "zip after pubish"
+    type: boolean
+    default: 'true'
+    values: 'false'
+  - name: 'ArtifactName'
+    displayName: "artifact name"
+    type: string
+    default: 'srdotnet'
+
+steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: "${{ parameters.command }}"
+      publishWebProjects: "${{ parameters.publishWebProjects }}"
+      arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+      zipAfterPublish: "${{ parameters.zipAfterPublish }}"
+      packagesToPack: '**/*.csproj'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: "${{ parameters.ArtifactName }}"
+      publishLocation: 'Container'
