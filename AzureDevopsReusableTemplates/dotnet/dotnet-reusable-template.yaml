@@ -40,4 +40,4 @@ steps:
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: "${{ parameters.ArtifactName }}"
-      publishLocation: 'Container'
+    
