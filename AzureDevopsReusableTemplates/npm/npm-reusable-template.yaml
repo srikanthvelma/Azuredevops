@@ -1,0 +1,9 @@
+# npm reusable template 
+steps:
+  - task: Npm@1
+    inputs:
+      command: 'install'
+  - task: Npm@1
+    inputs:
+      command: custom
+      customCommand: 'run build'
