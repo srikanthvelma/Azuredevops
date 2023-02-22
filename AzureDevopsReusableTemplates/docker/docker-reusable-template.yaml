@@ -12,6 +12,11 @@ parameters:
 steps:
   - task: Docker@2
     inputs: 
+      containerRegistry: 'Docker'
+      repository: 'srikanthvelma/azuredevops'
       command: "${{ parameters.command }}"
-      Dockerfile: '**/Dockerfile'
-      tags: $(build.build.id)
+      tags: 'latest'
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'images'
+      artifact: 'srdocker'
