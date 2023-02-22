@@ -5,6 +5,7 @@ parameters:
     type: string
     default: 'build'
     values:
+      - 'build'
       - 'push'
       - 'pack'
       - 'publish'
@@ -34,22 +35,35 @@ parameters:
     displayName: "artifact name"
     type: string
     default: 'srwebapp'
+  
+  - name: 'Buildconfiguration'
+    displayName: " build configuration "
+    type: string
+    default: 'Release'
 
-steps:
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'build'
-      projects: 'src/NopCommerce.sln'
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: "publish"
-      publishWebProjects: "${{ parameters.publishWebProjects }}"
-      arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
-      zipAfterPublish: "${{ parameters.zipAfterPublish }}"
-      packagesToPack: '**/*.csproj'
-
-  - task: PublishPipelineArtifact@1
-    inputs:
-      targetPath: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: "${{ parameters.ArtifactName }}"
-    
+stages:
+  - stage: Devlopment
+    displayName: "Dev Environment"
+    jobs:
+      - job: buildNdpublish      
+        steps:
+          - task: DotNetCoreCLI@2
+            inputs:
+              ${{ if eq(parameters['command'], 'build') }}:
+              command: "${{ parameters.command }}"
+              projects: 'src/NopCommerce.sln'
+          - task: DotNetCoreCLI@2
+            inputs:
+              ${{ if eq(parameters['command'], 'publish') }}:
+              command: "${{ parameters.command }}"
+              publishWebProjects: "${{ parameters.publishWebProjects }}"
+              arguments: '--configuration $(Buildconfiguration) --output $(Build.ArtifactStagingDirectory)'
+              zipAfterPublish: "${{ parameters.zipAfterPublish }}"
+              packagesToPack: '**/*.csproj'
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: "${{ parameters.ArtifactName }}"
+       
+          
+            
