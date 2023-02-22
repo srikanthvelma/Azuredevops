@@ -12,7 +12,7 @@ parameters:
 steps:
   - task: Docker@2
     inputs: 
-      containerRegistry: 'Docker'
+      containerRegistry: 'dockerhub'
       repository: 'srikanthvelma/azuredevops'
       command: "${{ parameters.command }}"
       tags: 'latest'
