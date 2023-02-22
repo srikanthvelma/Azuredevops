@@ -1,17 +1,30 @@
 # template for deploying to Azure App services 
+parameters:
+  - name: 'artifactName'
+    displayName: "name of artifact"
+    type: string
+    default: 'srweb'
+  - name: 'azureSubscription'
+    displayName: "azure subscription"
+    type: string
+    default: 'srwebapp'
+  - name: 'appName'
+    displayName: "app name"
+    type: string
+    default: 'srapp'
 
 steps:
   - task: DownloadPipelineArtifact@2
     inputs:
-      artifactName: 'nopweb'
-      downloadPath: '$(System.ArtifactsDirectory)/nopweb'
+      artifactName: "${{ parameters.artifactName }}"
+      downloadPath: '$(System.ArtifactsDirectory)/${{ parameters.artifactName }}'
     displayName: 'download package'
   - task: AzureWebApp@1
     inputs:
-      azureSubscription: 'nopwebapp'
+      azureSubscription: "${{ parameters.azureSubscription }}"
       appType: 'webAppLinux'
-      appName: 'srnop'
-      package: '$(System.ArtifactsDirectory)/nopweb/*.zip'
+      appName: "${{ parameters.appName }}"
+      package: '$(System.ArtifactsDirectory)/${{ parameters.artifactName }}/*.zip'
       deploymentMethod: 'auto'
 
 

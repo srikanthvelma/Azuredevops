@@ -31,10 +31,10 @@ parameters:
     values: 
       - 'false'
 
-  - name: 'ArtifactName'
+  - name: 'artifactName'
     displayName: "artifact name"
     type: string
-    default: 'srwebapp'
+    default: 'srweb'
   
   - name: 'Buildconfiguration'
     displayName: " build configuration "
@@ -52,7 +52,7 @@ steps:
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: "${{ parameters.ArtifactName }}"
+      ArtifactName: "${{ parameters.artifactName }}"
 
           
             
