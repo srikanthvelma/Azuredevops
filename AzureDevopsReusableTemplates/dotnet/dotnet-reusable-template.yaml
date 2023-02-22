@@ -44,12 +44,10 @@ parameters:
 steps:
   - task: DotNetCoreCLI@2
     inputs:
-      ${{ if eq(parameters['command'], 'build') }}:
-      command: "${{ parameters.command }}"
+      command: "build"
       projects: 'src/NopCommerce.sln'
   - task: DotNetCoreCLI@2
     inputs:
-      ${{ if eq(parameters['command'], 'publish') }}:
       command: "${{ parameters.command }}"
       publishWebProjects: "${{ parameters.publishWebProjects }}"
       arguments: '--configuration $(Buildconfiguration) --output $(Build.ArtifactStagingDirectory)'
