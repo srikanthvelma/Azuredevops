@@ -1,0 +1,17 @@
+
+parameters:
+- name: command
+  displayName: command
+  type: string
+  default: 'build'
+  values: 
+    - 'build'
+    - 'buildAndPush'
+    - 'push'
+
+steps:
+  - task: Docker@2
+    inputs: 
+      command: "${{ parameters.command }}"
+      Dockerfile: '**/Dockerfile'
+      tags: $(build.build.id)
