@@ -44,10 +44,6 @@ parameters:
 steps:
   - task: DotNetCoreCLI@2
     inputs:
-      command: "build"
-      projects: 'src/NopCommerce.sln'
-  - task: DotNetCoreCLI@2
-    inputs:
       command: "${{ parameters.command }}"
       publishWebProjects: "${{ parameters.publishWebProjects }}"
       arguments: '--configuration $(Buildconfiguration) --output $(Build.ArtifactStagingDirectory)'
