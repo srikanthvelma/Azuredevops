@@ -1,0 +1,10 @@
+# template for deploying to Azure App services 
+
+steps:
+  - task: AzureWebApp@1
+    inputs:
+      azureSubscription: 'nopwebapp'
+      appType: 'webAppLinux'
+      appName: 'srnop'
+      package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+      deploymentMethod: 'auto'
