@@ -1,12 +1,17 @@
 # template for deploying to Azure App services 
 
 steps:
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifactName: 'nopweb'
+      downloadPath: '$(System.ArtifactsDirectory)/nopweb'
+    displayName: 'download package'
   - task: AzureWebApp@1
     inputs:
       azureSubscription: 'nopwebapp'
       appType: 'webAppLinux'
       appName: 'srnop'
-      package: '$(System.DefaultWorkingDirectory)/**/nopweb/*.zip'
+      package: '$(System.ArtifactsDirectory)/nopweb/*.zip'
       deploymentMethod: 'auto'
 
 
