@@ -6,5 +6,7 @@ steps:
       azureSubscription: 'nopwebapp'
       appType: 'webAppLinux'
       appName: 'srnop'
-      package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+      package: '$(System.DefaultWorkingDirectory)/**/nopweb/*.zip'
       deploymentMethod: 'auto'
+
+
