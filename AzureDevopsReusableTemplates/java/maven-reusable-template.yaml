@@ -25,27 +25,27 @@ parameters:
     displayName: Authentic to maven feed
     type: boolean
     default: true
+  - name: ArtifactName
+    displayName: " artifact name" 
+    type: string
+    default: 'drop'
 
-    
-stages:
-  - stage: Devlopment
-    displayName: "Dev Environment"
-    jobs:
-      - job: buildNdpublish
-        steps:
-          - task: Maven@3
-            inputs:
-              mavenPOMFile: "${{ parameters.mavenPomFile }}"
-              goals: "${{ parameters.goal }}"
-              publishJUnitResults: yes
-              testResultsFiles: '**/surefire-reports/TEST-*.xml'
-              javaHomeOption: 'JDKVersion'
-              jdkVersionOption: "${{ parameters.jdkVersion }}"  
-              mavenAuthenticateFeed: "${{ parameters.mavenAuthenticateFeed }}"
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPOMFile: "${{ parameters.mavenPomFile }}"
+      goals: "${{ parameters.goal }}"
+      publishJUnitResults: yes
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: "${{ parameters.jdkVersion }}"  
+      mavenAuthenticateFeed: "${{ parameters.mavenAuthenticateFeed }}"
 
-          - task: PublishBuildArtifacts@1
-            inputs:
-              PathtoPublish: "${{ parameters.PathtoPublish }}" 
-              ArtifactName: 'drop' 
-              publishLocation: 'Container'  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "${{ parameters.PathtoPublish }}" 
+      ArtifactName: '${{ parameters.Artifact }}' 
+      publishLocation: 'Container' 
+
+          
             

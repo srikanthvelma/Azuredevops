@@ -8,7 +8,7 @@ trigger:
 
 parameters:
 - name: version
-  displayName: build versoin
+  displayName: build version
   type: string
   default: v1.0
 

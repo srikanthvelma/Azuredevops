@@ -1,0 +1,22 @@
+# template for deploying
+parameters:
+  - name: 'artifactName'
+    displayName: "name of artifact"
+    type: string
+    default: 'drop'
+  - name: 'downloadPath'
+    displayName: "path to download"
+    type: string
+    default: '/home/ubuntu'
+  - name: 'workingDirectory'
+    displayName: "working directory "
+    type: 'string'
+    default: '/home/ubuntu'
+steps:
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifactName: "${{ parameters.artifactName }}"
+      downloadPath: "${{ parameters.downloadPath }}"
+      displayName: 'download package'
+  - script: "ansible-playbook -i hosts spc.yaml"
+    workingDirectory: "${{ parameters.workingDirectory }}"
