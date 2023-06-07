@@ -17,15 +17,5 @@
                 command: 'build'
                 projects: ~/nopCommerce/src
   
-            - script: aws s3 cp $(Build.SourcesDirectory)/target/spring-petclinic-2.7.3.jar s3://srikanthcicd --acl public-read-write
-              displayName: uploading jar file to s3 
-  
-    - stage: RunStage
-      displayName: CI
-      jobs:
-        - job: ansibleJob
-          displayName: run through ansible 
-          steps:
-            - script: "ansible-playbook -i hosts spc.yaml"
-              workingDirectory: /home/ubuntu
+     
     
