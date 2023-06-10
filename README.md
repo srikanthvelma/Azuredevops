@@ -350,3 +350,6 @@ stages:
 #### Release pipelines
 #### Azure Devops pipeloine -secrets
 * use azure key vault store 
+
+
+* try to figure out how to configure github and Azure repos
